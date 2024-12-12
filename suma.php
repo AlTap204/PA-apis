@@ -5,8 +5,6 @@
 //El api regresa 400 si se llamo mal
 //Para llamar a api usamos esa linea http://localhost/apis/suma.php?numero1=5&numero2=195
 
-header("Content-Type:application/json");
-
 if (!empty($_GET["numero1"]) && !empty($_GET["numero2"])) {
     //Validar numero1 y numero2 sean numeros
     if (is_numeric($_GET["numero1"]) && is_numeric($_GET["numero2"])) {
@@ -28,10 +26,11 @@ if (!empty($_GET["numero1"]) && !empty($_GET["numero2"])) {
 
 //Declaramos la funcion response
 function response($status,$data){
+    header("Content-Type: application/json;");
     header("HTTP/1.1 ".$status);
     $response["status"]=$status;
     $response["result"]=$data;
-    $json_response=json_encode($response);
-    echo $json_response;
+    echo json_encode($response);
+
 }
 ?>
